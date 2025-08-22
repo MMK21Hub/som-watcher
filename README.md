@@ -1,6 +1,8 @@
-# Anything Watcher
+# Summer of Making Monitor
 
-Tracks something, providing Prometheus metrics that can be used to make dashboards like the demo below.
+Stock tracking for the Summer of Making shop using Prometheus metrics.
+
+Uses the [SoM Monitor API](https://github.com/SkyfallWasTaken/som-monitor) by Skyfall for shop data <3
 
 ## Online demo
 
@@ -30,10 +32,10 @@ Start tracking the metrics by adding Daydream Watcher as a scrape config to a Pr
 
 ```yaml
 scrape_configs:
-  - job_name: anything-watcher
+  - job_name: som-watcher
     scrape_interval: "10s"
     static_configs:
-      - targets: ["anything-watcher:9000"]
+      - targets: ["som-watcher:9000"]
 ```
 
 <!-- ### Example Grafana dashboard

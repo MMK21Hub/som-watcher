@@ -1,6 +1,6 @@
 services:
-  anything-watcher:
-    image: mmk21/anything-watcher:latest
+  som-watcher:
+    image: mmk21/som-watcher:latest
     init: true
     restart: unless-stopped
     ports:

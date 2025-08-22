@@ -1,7 +1,7 @@
 #!/bin/bash
 export version=$1
 export version_tag="v$version"
-export image=mmk21/anything-watcher
+export image=mmk21/som-watcher
 
 if [ -z "$version" ]; then
   echo "Usage: $0 <version>"

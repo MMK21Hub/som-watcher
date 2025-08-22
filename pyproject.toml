@@ -1,5 +1,5 @@
 [project]
-name = "anything-watcher"
+name = "som-watcher"
 version = "0.0.0"
 description = "Prometheus metrics exporter for anything"
 readme = "README.md"

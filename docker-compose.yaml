@@ -1,5 +1,5 @@
 services:
-  anything-watcher:
+  som-watcher:
     build: .
     init: true
     ports:
