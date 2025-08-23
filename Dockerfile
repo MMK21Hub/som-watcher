@@ -9,6 +9,6 @@ COPY uv.lock .
 RUN uv sync --locked
 COPY main.py .
 
-EXPOSE 9000
+EXPOSE 9040
 ENV PATH="/app/.venv/bin:$PATH"
 ENTRYPOINT ["python", "main.py"]

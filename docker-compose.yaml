@@ -3,4 +3,4 @@ services:
     build: .
     init: true
     ports:
-      - 9000:9000
+      - 9040:9040

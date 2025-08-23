@@ -18,13 +18,13 @@ This project uses Python (3.9+) and [uv](https://docs.astral.sh/uv/) for develop
 
 1. Clone the repo
 2. `uv run main.py`
-3. Head to <http://localhost:9000/metrics> to see the metrics
+3. Head to <http://localhost:9040/metrics> to see the metrics
 
 ## Production deployment with Docker Compose
 
 1. Download the example Compose file from [deployment/docker-compose.yml](deployment/docker-compose.yml). Feel free to adjust it to your needs.
 2. Start it with `docker-compose up -d`
-3. Metrics should now be available at <http://localhost:9000/metrics>
+3. Metrics should now be available at <http://localhost:9040/metrics>
 
 ### Example `prometheus.yml` config
 
@@ -35,7 +35,7 @@ scrape_configs:
   - job_name: som-watcher
     scrape_interval: "10s"
     static_configs:
-      - targets: ["som-watcher:9000"]
+      - targets: ["som-watcher:9040"]
 ```
 
 <!-- ### Example Grafana dashboard

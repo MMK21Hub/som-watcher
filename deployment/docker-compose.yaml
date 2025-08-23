@@ -4,4 +4,4 @@ services:
     init: true
     restart: unless-stopped
     ports:
-      - 9000:9000
+      - 9040:9040
