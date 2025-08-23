@@ -4,4 +4,8 @@ version = "0.0.0"
 description = "Prometheus metrics exporter for anything"
 readme = "README.md"
 requires-python = ">=3.9"
-dependencies = ["prometheus-client>=0.22.1"]
+dependencies = [
+    "prometheus-client>=0.22.1",
+    "pydantic>=2.11.7",
+    "requests>=2.32.5",
+]
