@@ -10,7 +10,7 @@ Uses the [SoM Monitor API](https://github.com/SkyfallWasTaken/som-monitor) by Sk
 
 **[🌍 View dashboard on grafana.slevel.xyz][1]**
 
-[1]: TODO <!-- Add demo link here -->
+[1]: http://grafana.slevel.xyz/public-dashboards/2863782783c140a194976fa2b706bf1b
 
 ## Local development
 
