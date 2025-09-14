@@ -44,7 +44,9 @@ Start visualising the metrics by importing the example Grafana dashboard at [dep
 
 ## Maintainers: Releasing a new version
 
-Use the `release-new-version.sh` shell script, e.g.
+First, check [existing tags on Docker Hub](https://hub.docker.com/r/mmk21/som-watcher/tags).
+
+Then, use the `release-new-version.sh` shell script, e.g.
 
 ```bash
 ./release-new-version.sh 0.2.1
