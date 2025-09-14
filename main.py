@@ -5,8 +5,8 @@ from time import sleep
 from traceback import format_exc
 from argparse import ArgumentParser
 from prometheus_client import start_http_server, Gauge
-from typing import List, Literal, Optional
-from pydantic import BaseModel, Field, ValidationError
+from typing import Any, List, Literal, Optional
+from pydantic import BaseModel, Field, ValidationError, field_validator
 import requests
 
 # class Prices(BaseModel):
@@ -28,7 +28,7 @@ REGION_NAMES = {
 }
 
 
-type ShopType = Literal["regular", "blackMarket", "stickerlode"]
+type ShopType = Literal["public_shop", "black_market", "stickerlode"]
 
 
 class ShopItem(BaseModel):
@@ -40,6 +40,19 @@ class ShopItem(BaseModel):
     shop_type: ShopType = Field(..., alias="shopType")
     prices: dict[str, int]
     stock_remaining: Optional[int] = Field(None, alias="stockRemaining")
+
+    @field_validator("shop_type", mode="before")
+    @classmethod
+    def parse_shop_type(cls, value: Any) -> Any:
+        match value:
+            case "blackMarket":
+                return "black_market"
+            case "regular":
+                return "public_shop"
+            case "stickerlode":
+                return "stickerlode"
+            case _:
+                return value
 
 
 def fetch_shop() -> list[ShopItem]:
@@ -108,16 +121,11 @@ def main():
         try:
             items = fetch_shop()
             for item in items:
-                shop_type = (
-                    "black_market"
-                    if item.shop_type == "blackMarket"
-                    else item.shop_type
-                )
                 stock_gauge.labels(
                     item_id=item.id,
                     item_name=item.title,
                     item_image=item.image_url,
-                    shop_type=shop_type,
+                    shop_type=item.shop_type,
                     item_description=item.description,
                 ).set(item.stock_remaining or +inf)
                 for region, price in item.prices.items():
@@ -126,7 +134,7 @@ def main():
                         item_id=item.id,
                         item_name=item.title,
                         item_image=item.image_url,
-                        shop_type=shop_type,
+                        shop_type=item.shop_type,
                         item_description=item.description,
                         region=region,
                         region_name=region_name,
