@@ -5,7 +5,7 @@ from time import sleep
 from traceback import format_exc
 from argparse import ArgumentParser
 from prometheus_client import start_http_server, Gauge
-from typing import List, Optional
+from typing import List, Literal, Optional
 from pydantic import BaseModel, Field, ValidationError
 import requests
 
@@ -28,13 +28,16 @@ REGION_NAMES = {
 }
 
 
+type ShopType = Literal["regular", "blackMarket", "stickerlode"]
+
+
 class ShopItem(BaseModel):
     title: str
     image_url: str = Field(..., alias="imageUrl")
     description: str
     purchase_url: str = Field(..., alias="purchaseUrl")
     id: int
-    is_black_market: bool = Field(..., alias="isBlackMarket")
+    shop_type: ShopType = Field(..., alias="shopType")
     prices: dict[str, int]
     stock_remaining: Optional[int] = Field(None, alias="stockRemaining")
 
@@ -105,7 +108,11 @@ def main():
         try:
             items = fetch_shop()
             for item in items:
-                shop_type = "black_market" if item.is_black_market else "public_shop"
+                shop_type = (
+                    "black_market"
+                    if item.shop_type == "blackMarket"
+                    else item.shop_type
+                )
                 stock_gauge.labels(
                     item_id=item.id,
                     item_name=item.title,
