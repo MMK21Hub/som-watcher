@@ -35,7 +35,7 @@ class ShopItem(BaseModel):
     title: str
     image_url: str = Field(..., alias="imageUrl")
     description: str
-    purchase_url: str = Field(..., alias="purchaseUrl")
+    purchase_url: Optional[str] = Field(None, alias="purchaseUrl")
     id: int
     shop_type: ShopType = Field(..., alias="shopType")
     prices: dict[str, int]
